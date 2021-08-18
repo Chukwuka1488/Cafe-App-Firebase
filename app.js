@@ -1,0 +1,28 @@
+const cafeList = document.querySelector('#cafe-list');
+
+// create element and render cafe
+function renderCafe(doc) {
+  let li = document.createElement('li');
+  let name = document.createElement('span');
+  let city = document.createElement('span');
+
+  //   set attribute to li tag
+  li.setAttribute('data-id', doc.id);
+
+  name.textContent = doc.data().name;
+  city.textContent = doc.data().city;
+
+  // append the city and name to li
+  li.appendChild(name);
+  li.appendChild(city);
+
+  cafeList.appendChild(li);
+}
+
+db.collection('cafes')
+  .get()
+  .then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      renderCafe(doc);
+    });
+  });
